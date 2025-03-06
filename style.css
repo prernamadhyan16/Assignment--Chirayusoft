@@ -241,7 +241,110 @@ body {
 
 #page-content {
     flex: 1;
+    z-index: 100;
 }
 
 
 /* Bars.html----------------------- */
+
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 10px;
+    z-index: 0;
+}
+
+.rate-tabs {
+    display: flex;
+    background-color: #f4f4f4;
+    border-bottom: 1px solid #ddd;
+}
+
+.rate-tabs div {
+    padding: 10px 15px;
+    cursor: pointer;
+    background-color: #f4f4f4;
+    color: #333;
+    font-weight: bold;
+}
+
+.rate-tabs div.active {
+    background-color: orange;
+    color: white;
+}
+
+.rates-header {
+    display: flex;
+    background-color: black;
+    color: white;
+    padding: 10px;
+    justify-content: space-between;
+}
+
+.rates-header div {
+    text-align: center;
+}
+
+.rates-header div:first-child {
+    color: orange;
+}
+
+.rates-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+}
+
+.rates-table th,
+.rates-table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+}
+
+.rates-table th {
+    background-color: #f4f4f4;
+}
+
+.product-rates {
+    background-color: white;
+}
+
+.application-info {
+    border: 1px solid #ddd;
+    padding: 15px;
+    background-color: white;
+    margin-top: 10px;
+}
+
+.application-info h3 {
+    color: orange;
+    margin-top: 0;
+}
+
+.contact-details {
+    display: flex;
+    margin-top: 10px;
+}
+
+.contact-details div {
+    flex: 1;
+}
+
+.loading {
+    text-align: center;
+    color: #888;
+    padding: 20px;
+}
+
+.last-updated {
+    text-align: right;
+    font-size: 0.8em;
+    color: #666;
+    margin-top: 10px;
+}
+
+.hide-display{
+    display: none;
+}

@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home | Aarav Bullion</title>
     <link rel="stylesheet" href="style.css">
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script> <!-- FontAwesome for icons -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script> 
 </head>
 <body>
     <header>
@@ -31,7 +31,8 @@
         <nav id="navbar">
             <div class="menu-icon" onclick="toggleMenu()">&#9776;</div> 
             <ul class="nav-links">
-                <li><a href="#" onclick="loadPage('bars')">BARS</a></li>
+                <!-- let temp; -->
+                <li><a href="#"  onclick="loadPage('bars')">BARS</a></li>
                 <li><a href="#" onclick="loadPage('messages')">MESSAGES</a></li>
                 <li><a href="#" onclick="loadPage('contact')">CONTACT</a></li>
                 <li><a href="#" onclick="loadPage('about')">ABOUT US</a></li>
@@ -46,10 +47,67 @@
         </nav>
     </header>
     
-    <div id="page-content"></div>
+    <div id="page-content">
+        
+    </div>
 
+    <div class="container">
+        <div class="rate-tabs">
+            <div class="active">GOLD RATES</div>
+            <div>SILVER RATES</div>
+            <div>COIN RATES</div>
+        </div>
+        
+        <div class="rates-header">
+            <div>Gold($)..</div>
+            <div>Silver</div>
+            <div>USD</div>
+        </div>
+        <div id="mainRatesHeader" class="rates-header" style="background-color: white; color: black;">
+            <div style="color: orange;">-</div>
+            <div>-</div>
+            <div>-</div>
+        </div>
+
+        <div id="loadingIndicator" class="loading">Loading rates...</div>
+        
+        <table id="ratesTable" class="rates-table product-rates" style="display:none;">
+            <thead>
+                <tr>
+                    <!-- <th>Product</th>
+                    <th>Current Rate</th>
+                    <th>High</th>
+                    <th>Low</th>
+                    <th>Buy</th> -->
+                </tr>
+            </thead>
+            <tbody id="ratesBody"></tbody>
+        </table>
+
+        <div id="lastUpdated" class="last-updated"></div>
+
+        <div class="application-info">
+            <h3>Application Available</h3>
+            <div class="contact-details">
+                <div>
+                    <p><strong>Contact Person</strong><br>
+                    Mr. Pratik Soni<br>
+                    +91 9825677940<br>
+                    079-26575201</p>
+                </div>
+                <div>
+                    <p><strong>E-mail id:</strong><br>
+                    aaravbullion9@gmail.com</p>
+                    <p><strong>Registered & Head Office</strong><br>
+                    G/29, DEVNADAN MALL,<br>
+                    OPP. SANYASH ASHRAM,<br>
+                    ELLISBRIDGE ASHRAM ROAD,<br>
+                    AHMEDABAD 380006</p>
+                </div>
+            </div>
+        </div>
+    </div> 
     <script src="script.js"></script>
-    <div>Lorem1000</div>
     <footer class="footer">
         <div class="footer-container">
             <div class="footer-left">
@@ -66,8 +124,6 @@
         <div class="footer-bottom">
             <p>Powered by : <strong>Chirayu Software Solutions</strong></p>
         </div>
-    </footer>
-    
-    
+    </footer>    
 </body>
 </html>
