@@ -16,7 +16,6 @@ function loadPage(page) {
             const activeLink = document.querySelector(`.nav-links a[href="#"][onclick="loadPage('${page}')"]`);
             if (activeLink) activeLink.classList.add("active");
 
-            // Show container only when "BARS" is active
             const container = document.querySelector(".container");
             if (page === "bars") {
                 container.style.display = "block";
@@ -28,7 +27,6 @@ function loadPage(page) {
 }
 
 
-// Function to dynamically load scripts
 function loadScript(src, callback) {
     const script = document.createElement("script");
     script.src = src;
@@ -36,7 +34,6 @@ function loadScript(src, callback) {
     document.body.appendChild(script);
 }
 
-// Mobile Menu Toggle
 function toggleMenu() {
     document.querySelector(".nav-links").classList.toggle("active");
 }
@@ -52,7 +49,9 @@ document.addEventListener('DOMContentLoaded', () => {
             this.loadingIndicator = document.getElementById('loadingIndicator');
             this.lastUpdatedEl = document.getElementById('lastUpdated');
             this.mainRatesHeader = document.getElementById('mainRatesHeader');
+            this.currentFilter = "All";  // Stores the active filter
         }
+
         async fetchRates() {
             try {
                 const startTime = performance.now();
@@ -70,6 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 this.loadingIndicator.textContent = 'Error loading rates. Retrying...';
             }
         }
+
         parseRates(responseText) {
             const lines = responseText.trim().split('\n');
             const ratesMap = {
@@ -81,6 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 'Specific Gold Rates': [],
                 'Specific Silver Rates': []
             };
+
             lines.forEach(line => {
                 const parts = line.trim().split('\t');
                 if (parts.length >= 5) {
@@ -88,6 +89,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     const current = parseFloat(parts[2]);
                     const high = parseFloat(parts[3]);
                     const low = parseFloat(parts[4]);
+
                     if (name === 'Gold($)..') {
                         ratesMap['Gold($)..'] = { current, high, low };
                     } else if (name === 'Silver') {
@@ -105,14 +107,18 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                 }
             });
+
             return ratesMap;
         }
+
         updateRatesTable(rates) {
             const mainRatesHeaderDiv = this.mainRatesHeader.children;
             mainRatesHeaderDiv[0].textContent = rates['Gold($)..'].current.toFixed(2);
             mainRatesHeaderDiv[1].textContent = rates['Silver'].current.toFixed(2);
             mainRatesHeaderDiv[2].textContent = rates['USD'].current.toFixed(3);
+
             this.ratesBody.innerHTML = '';
+
             const mainRates = [
                 { name: 'Gold', data: rates['Gold($)..'] },
                 { name: 'Silver', data: rates['Silver'] },
@@ -120,21 +126,29 @@ document.addEventListener('DOMContentLoaded', () => {
                 { name: 'Gold Costing', data: rates['GOLD COSTING'] },
                 { name: 'Silver Costing', data: rates['SILVER COSTING'] }
             ];
+
             mainRates.forEach(rate => {
                 const row = this.createRateRow(rate.name, rate.data);
                 this.ratesBody.appendChild(row);
             });
+
             rates['Specific Gold Rates'].forEach(rate => {
                 const row = this.createRateRow(rate.name, rate);
                 this.ratesBody.appendChild(row);
             });
+
             rates['Specific Silver Rates'].forEach(rate => {
                 const row = this.createRateRow(rate.name, rate);
                 this.ratesBody.appendChild(row);
             });
+
+            this.applyFilter();
         }
+
         createRateRow(name, data) {
             const row = document.createElement('tr');
+            row.setAttribute('data-category', name.includes('GOLD') ? 'Gold' : name.includes('SILVER') ? 'Silver' : 'Other');
+
             row.innerHTML = `
                 <td>${name}</td>
                 <td>${data.current || 'N/A'}</td>
@@ -142,17 +156,43 @@ document.addEventListener('DOMContentLoaded', () => {
             `;
             return row;
         }
+
         startRealTimeUpdates() {
             this.fetchRates();
             setInterval(() => {
                 this.fetchRates();
             }, this.updateInterval);
         }
+
+        applyFilter() {
+            document.querySelectorAll("#ratesBody tr").forEach(row => {
+                const category = row.getAttribute("data-category");
+
+                if (this.currentFilter === "All") {
+                    row.style.display = "";
+                } else {
+                    row.style.display = category === this.currentFilter ? "" : "none";
+                }
+            });
+        }
+
+        setFilter(filterType) {
+            this.currentFilter = filterType;
+            this.applyFilter();
+        }
     }
+
     const ratesAPI = new RatesAPI('https://bcast.aaravbullion.in/VOTSBroadcastStreaming/Services/xml/GetLiveRateByTemplateID/aarav?_=1741068774453');
     ratesAPI.startRealTimeUpdates();
+
+    document.querySelectorAll(".rate-tabs div").forEach(tab => {
+        tab.addEventListener("click", function () {
+            document.querySelectorAll(".rate-tabs div").forEach(t => t.classList.remove("active"));
+            this.classList.add("active");
+        });
+    });
+
+    document.getElementById("goldFilter").addEventListener("click", () => ratesAPI.setFilter("Gold"));
+    document.getElementById("silverFilter").addEventListener("click", () => ratesAPI.setFilter("Silver"));
+    document.getElementById("coinFilter").addEventListener("click", () => ratesAPI.setFilter("COIN"));
 });
-
-
-// <td>${data.high || 'N/A'}</td>
-//                 <td>${data.low || 'N/A'}</td>

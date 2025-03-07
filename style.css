@@ -1,4 +1,3 @@
-/* Reset styles */
 * {
     margin: 0;
     padding: 0;
@@ -6,7 +5,7 @@
     font-family: Arial, sans-serif;
 }
 
-/* Top bar */
+
 .top-bar {
     background: #edecec;
     padding: 10px;
@@ -15,7 +14,6 @@
     color: grey;
 }
 
-/* Header container */
 .header-container {
     display: flex;
     justify-content: space-between;
@@ -24,7 +22,6 @@
     border-bottom: 2px solid #ddd;
 }
 
-/* Logo */
 .logo h1 {
     font-size: 32px;
     font-weight: bold;
@@ -32,7 +29,6 @@
     font-family: "Georgia", serif;
 }
 
-/* Contact Section */
 .contact {
     display: flex;
     align-items: center;
@@ -63,7 +59,6 @@
     color: gray;
 }
 
-/* Navbar */
 nav {
     background: #e75b1e;
     color: white;
@@ -75,9 +70,9 @@ nav {
     top: 0;
     width: 100%;
     z-index: 1000;
+    position: sticky;
 }
 
-/* Desktop Navbar */
 .nav-links {
     list-style: none;
     display: flex;
@@ -102,7 +97,6 @@ nav {
     border-radius: 5px;
 }
 
-/* Hamburger Menu for Small Screens */
 .menu-icon {
     display: none;
     font-size: 24px;
@@ -111,7 +105,6 @@ nav {
     padding: 10px;
 }
 
-/* Responsive Design */
 @media screen and (max-width: 768px) {
     .header-container {
         flex-direction: column;
@@ -148,35 +141,23 @@ nav {
     }
 }
 
-/* Marquee Scrolling Bar */
-.marquee-container {
-    background: black;
-    padding: 5px 0;
-}
 
-marquee span {
-    color: yellow;
-    font-weight: bold;
-    font-size: 14px;
-}
-
-/* Sticky Navbar Effect */
 nav.sticky {
     position: fixed;
+    z-index: 100;
     top: 0;
     width: 100%;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
 
-/* Page Content */
+
 .content {
     padding: 20px;
     text-align: center;
     font-size: 18px;
 }
-/* --------------------------------------- */
+/* ------------------Footer--------------------- */
 
-/* Footer */
 .footer {
     background-color: #111;
     color: white;
@@ -186,7 +167,6 @@ nav.sticky {
     width: 100%;
 }
 
-/* Container */
 .footer-container {
     display: flex;
     justify-content: space-between;
@@ -195,14 +175,14 @@ nav.sticky {
     margin: 0 auto;
 }
 
-/* Footer Left */
+
 .footer-left p {
     margin: 5px 0;
     color: #aaa;
     font-size: 12px;
 }
 
-/* Footer Right */
+
 .footer-right {
     text-align: right;
 }
@@ -219,7 +199,7 @@ nav.sticky {
     margin: 2px 0;
 }
 
-/* Footer Bottom */
+
 .footer-bottom {
     text-align: right;
     font-size: 12px;
@@ -228,7 +208,7 @@ nav.sticky {
     padding-right: 30px;
 }
 
-/* Ensure footer stays at the bottom */
+
 html, body {
     height: 100%;
     margin: 0;
@@ -291,6 +271,7 @@ body {
 }
 
 .rates-table {
+    
     width: 100%;
     border-collapse: collapse;
     background-color: white;
