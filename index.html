@@ -30,7 +30,8 @@
           </div>
         </div>
       </div>
-
+      
+    
       <nav id="navbar">
         <div class="menu-icon" onclick="toggleMenu()">&#9776;</div>
         <ul class="nav-links">
@@ -62,51 +63,61 @@
         </ul>
       </nav>
     </header>
+    
+    
+    <div class="ticker-container">
+      <div class="ticker-content">
+        FOR NEW ACCOUNT OPENING CONTACT - 9054075971, 9825677940.
+        ONLINE BOOKING TIMING - MONDAY TO FRIDAY (9.05 AM TO 11.50 PM) SATURDAY TIMING (11.00 AM TO 6.00 PM).DOORSTEP DELIVERY AVAILABLE IN ALL CITIES OF INDIA, OUR ONLINE RATE +10Rs. MINIMUM QUANTITY 500gm.
+      </div>
+  </div>
 
     <div id="page-content"></div>
 
     <div class="container">
-      <div class="rate-tabs">
-        <div class="active" id="goldFilter">GOLD RATES</div>
-        <div id="silverFilter">SILVER RATES</div>
-        <div id="coinFilter">COIN RATES</div>
+      <div class="table-info">
+        <div class="rate-tabs">
+          <div class="active" id="goldFilter">GOLD RATES</div>
+          <div id="silverFilter">SILVER RATES</div>
+          <div id="coinFilter">COIN RATES</div>
+        </div>
+  
+        <div class="rates-header">
+          <div>Gold($)..</div>
+          <div>Silver</div>
+          <div>USD</div>
+        </div>
+        <div
+          id="mainRatesHeader"
+          class="rates-header"
+          style="background-color: white; color: black"
+        >
+          <div style="color: orange">-</div>
+          <div>-</div>
+          <div>-</div>
+        </div>
+  
+        <div id="loadingIndicator" class="loading">Loading rates...</div>
+  
+        <table
+          id="ratesTable"
+          class="rates-table product-rates"
+          style="display: none"
+        >
+          <thead>
+            <tr>
+              <!-- <th>Product</th>
+                      <th>Current Rate</th>
+                      <th>High</th>
+                      <th>Low</th>
+                      <th>Buy</th> -->
+            </tr>
+          </thead>
+          <tbody id="ratesBody"></tbody>
+        </table>
+  
+        <div id="lastUpdated" class="last-updated"></div>
       </div>
-
-      <div class="rates-header">
-        <div>Gold($)..</div>
-        <div>Silver</div>
-        <div>USD</div>
-      </div>
-      <div
-        id="mainRatesHeader"
-        class="rates-header"
-        style="background-color: white; color: black"
-      >
-        <div style="color: orange">-</div>
-        <div>-</div>
-        <div>-</div>
-      </div>
-
-      <div id="loadingIndicator" class="loading">Loading rates...</div>
-
-      <table
-        id="ratesTable"
-        class="rates-table product-rates"
-        style="display: none"
-      >
-        <thead>
-          <tr>
-            <!-- <th>Product</th>
-                    <th>Current Rate</th>
-                    <th>High</th>
-                    <th>Low</th>
-                    <th>Buy</th> -->
-          </tr>
-        </thead>
-        <tbody id="ratesBody"></tbody>
-      </table>
-
-      <div id="lastUpdated" class="last-updated"></div>
 
       <div class="application-info">
         <h3>Application Available</h3>
