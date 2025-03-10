@@ -1,6 +1,3 @@
-document.addEventListener("DOMContentLoaded", () => {
-    loadPage("bars"); 
-});
 
 function loadPage(page) {
     fetch(`pages/${page}/${page}.html`)
@@ -50,6 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
             this.lastUpdatedEl = document.getElementById('lastUpdated');
             this.mainRatesHeader = document.getElementById('mainRatesHeader');
             this.currentFilter = "All";  // Stores the active filter
+            this.previousRates = {}
         }
 
         async fetchRates() {
@@ -116,9 +114,9 @@ document.addEventListener('DOMContentLoaded', () => {
             mainRatesHeaderDiv[0].textContent = rates['Gold($)..'].current.toFixed(2);
             mainRatesHeaderDiv[1].textContent = rates['Silver'].current.toFixed(2);
             mainRatesHeaderDiv[2].textContent = rates['USD'].current.toFixed(3);
-
+        
             this.ratesBody.innerHTML = '';
-
+        
             const mainRates = [
                 { name: 'Gold', data: rates['Gold($)..'] },
                 { name: 'Silver', data: rates['Silver'] },
@@ -126,36 +124,56 @@ document.addEventListener('DOMContentLoaded', () => {
                 { name: 'Gold Costing', data: rates['GOLD COSTING'] },
                 { name: 'Silver Costing', data: rates['SILVER COSTING'] }
             ];
-
+        
             mainRates.forEach(rate => {
                 const row = this.createRateRow(rate.name, rate.data);
                 this.ratesBody.appendChild(row);
             });
-
+        
             rates['Specific Gold Rates'].forEach(rate => {
                 const row = this.createRateRow(rate.name, rate);
                 this.ratesBody.appendChild(row);
             });
-
+        
             rates['Specific Silver Rates'].forEach(rate => {
                 const row = this.createRateRow(rate.name, rate);
                 this.ratesBody.appendChild(row);
             });
-
+        
             this.applyFilter();
         }
+        
 
         createRateRow(name, data) {
             const row = document.createElement('tr');
             row.setAttribute('data-category', name.includes('GOLD') ? 'Gold' : name.includes('SILVER') ? 'Silver' : 'Other');
-
+        
+            const prevData = this.previousRates[name] || { current: data.current }; 
             row.innerHTML = `
                 <td>${name}</td>
-                <td>${data.current || 'N/A'}</td>
+                <td class="rate-value">${data.current || 'N/A'}</td>
                 <td><button style="padding: 5px; margin:2px 40px">Buy</button></td>
             `;
+        
+            const valueCell = row.querySelector('.rate-value');
+            
+            if (prevData.current !== undefined) {
+                if (data.current > prevData.current) {
+                    valueCell.style.backgroundColor = 'green';
+                } else if (data.current < prevData.current) {
+                    valueCell.style.backgroundColor = 'red';
+                }
+            }
+        
+            setTimeout(() => {
+                valueCell.style.backgroundColor = '';
+            }, 5000);
+        
+            this.previousRates[name] = { current: data.current };
+        
             return row;
         }
+        
 
         startRealTimeUpdates() {
             this.fetchRates();
